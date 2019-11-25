@@ -9,7 +9,11 @@ import java.util.List;
 public class CarroRepository {
 
     public List<String> listarCarros () {
-        List<String> carros = Arrays.asList("Celta", "Fusca", "Ferrari", "Uno");
+        List<String> carros = Arrays.asList("Celta",
+                "Fusca",
+                "Ferrari",
+                "Uno",
+                "Camaro");
         return carros;
     }
 
