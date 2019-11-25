@@ -14,7 +14,8 @@ public class CarroRepository {
                 "Ferrari",
                 "Uno",
                 "Camaro",
-                "Outro Carro"
+                "Maveric",
+                "Triciclo"
         );
         return carros;
     }
