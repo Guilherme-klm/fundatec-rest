@@ -13,8 +13,8 @@ public class CarroRepository {
                 "Fusca",
                 "Ferrari",
                 "Uno",
-                "Camaro"
-
+                "Camaro",
+                "Outro Caro"
         );
         return carros;
     }
