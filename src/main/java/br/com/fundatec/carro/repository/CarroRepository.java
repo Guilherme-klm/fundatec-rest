@@ -2,6 +2,7 @@ package br.com.fundatec.carro.repository;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,4 +21,14 @@ public class CarroRepository {
         return carros;
     }
 
+    public List<String> filtrarLista (String nome) {
+        List<String> palavrasFiltradas =  new ArrayList<>();
+
+        for (String carro : listarCarros()) {
+            if (carro.toLowerCase().contains(nome.toLowerCase())) {
+                palavrasFiltradas.add(carro);
+            }
+        }
+        return palavrasFiltradas;
+    }
 }
