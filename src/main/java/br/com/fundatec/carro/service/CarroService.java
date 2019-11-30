@@ -22,4 +22,8 @@ public class CarroService {
     public Carro filtrarPorId (Long id) {
         return carroRepository.filtrarPorId(id);
     }
+
+    public Carro incluir(Carro carro) {
+       return carroRepository.incluir(carro);
+    }
 }
