@@ -4,8 +4,6 @@ import br.com.fundatec.carro.model.Carro;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
