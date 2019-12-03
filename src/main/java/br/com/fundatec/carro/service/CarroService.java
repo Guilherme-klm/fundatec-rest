@@ -24,6 +24,13 @@ public class CarroService {
     }
 
     public Carro incluir(Carro carro) {
+        validar(carro);
        return carroRepository.incluir(carro);
+    }
+
+    public void validar (Carro carro) {
+        if (carro.getDataModelo().isBefore(carro.getDataFabricacao())) {
+             throw new RuntimeException("Data modelo é inválida");
+        }
     }
 }
