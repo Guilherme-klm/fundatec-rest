@@ -9,6 +9,7 @@ public class CarroOutputDTO {
     private String placa;
     private LocalDate dataFabricacao;
     private LocalDate dataModelo;
+    private String marca;
 
     public Long getId() {
         return id;
@@ -48,5 +49,13 @@ public class CarroOutputDTO {
 
     public void setDataModelo(LocalDate dataModelo) {
         this.dataModelo = dataModelo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }

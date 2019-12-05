@@ -18,6 +18,7 @@ public class CarroMapper {
         carroOutputDTO.setPlaca(carro.getPlaca());
         carroOutputDTO.setDataFabricacao(carro.getDataFabricacao());
         carroOutputDTO.setDataModelo(carro.getDataModelo());
+        carroOutputDTO.setMarca(carro.getMarca());
 
         return carroOutputDTO;
     }
@@ -36,6 +37,7 @@ public class CarroMapper {
         carro.setPlaca(carroInputDTO.getPlaca());
         carro.setDataFabricacao(carroInputDTO.getDataFabricacao());
         carro.setDataModelo(carroInputDTO.getDataModelo());
+        carro.setMarca(carroInputDTO.getMarca());
         return carro;
     }
 

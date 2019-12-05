@@ -3,11 +3,13 @@ package br.com.fundatec.carro.api;
 import br.com.fundatec.carro.mapper.CarroMapper;
 import br.com.fundatec.carro.model.Carro;
 import br.com.fundatec.carro.service.CarroService;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -47,12 +49,18 @@ public class CarroApi {
     }
 
     @PostMapping("/carros")
-    public ResponseEntity<CarroOutputDTO> incluir (@Valid @RequestBody CarroInputDTO carroInputDTO) {
+    public ResponseEntity<?> incluir (@Valid @RequestBody CarroInputDTO carroInputDTO) {
         Carro carro = carroMapper.mapear(carroInputDTO); //@Valid valida o @NotBlank de uma classe
-        carro = carroService.incluir(carro);
+        try {
+            carro = carroService.incluir(carro);
+            CarroOutputDTO carroOutputDTO = carroMapper.mapear(carro);
+            return ResponseEntity.status(HttpStatus.CREATED).body(carroOutputDTO);
+        } catch (RuntimeException e) {
+            ErroDTO erroDTO = new ErroDTO();
+            erroDTO.setMensagem(e.getMessage());
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(erroDTO);
+        }
 
-        CarroOutputDTO carroOutputDTO = carroMapper.mapear(carro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(carroOutputDTO);
     }
 }
 

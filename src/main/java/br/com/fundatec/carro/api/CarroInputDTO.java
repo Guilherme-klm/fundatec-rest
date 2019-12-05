@@ -23,6 +23,14 @@ public class CarroInputDTO {
     @NotNull(message = "Não pode ser nulo")
     private LocalDate dataModelo;
 
+    @NotNull(message = "Não pode ser nulo")
+    @NotEmpty(message = "Não pode ser vazio")
+    private String marca;
+
+    public CarroInputDTO (){
+
+    }
+
     public String getNome() {
         return nome;
     }
@@ -53,5 +61,13 @@ public class CarroInputDTO {
 
     public void setDataModelo(LocalDate dataModelo) {
         this.dataModelo = dataModelo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }
