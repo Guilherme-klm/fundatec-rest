@@ -27,13 +27,7 @@ public class CarroApi {
     public ResponseEntity<List<CarroOutputDTO>> getCarros(@RequestParam(required = false, defaultValue = "") String nome) {
 
         List<Carro> carros = carroService.filtrarLista(nome);
-        List<CarroOutputDTO> carroOutputDTOList = carroMapper.mapear(carros);
-
-        if (carros.size() == 0) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(carroOutputDTOList);
-        }
+        return getListResponseEntity(carros);
     }
 
     @GetMapping("/carros/datas") // retorna dados
@@ -41,6 +35,10 @@ public class CarroApi {
                                                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
 
         List<Carro> carros = carroService.filtrarPorData(dataInicio, dataFim);
+        return getListResponseEntity(carros);
+    }
+
+    private ResponseEntity<List<CarroOutputDTO>> getListResponseEntity(List<Carro> carros) {
         List<CarroOutputDTO> carroOutputDTOList = carroMapper.mapear(carros);
 
         if (carros.size() == 0) {
