@@ -3,13 +3,13 @@ package br.com.fundatec.carro.api;
 import br.com.fundatec.carro.mapper.CarroMapper;
 import br.com.fundatec.carro.model.Carro;
 import br.com.fundatec.carro.service.CarroService;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,6 +27,20 @@ public class CarroApi {
     public ResponseEntity<List<CarroOutputDTO>> getCarros(@RequestParam(required = false, defaultValue = "") String nome) {
 
         List<Carro> carros = carroService.filtrarLista(nome);
+        List<CarroOutputDTO> carroOutputDTOList = carroMapper.mapear(carros);
+
+        if (carros.size() == 0) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(carroOutputDTOList);
+        }
+    }
+
+    @GetMapping("/carros/datas") // retorna dados
+    public ResponseEntity<List<CarroOutputDTO>> getCarrosEntreDatas (@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+                                                                     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
+
+        List<Carro> carros = carroService.filtrarPorData(dataInicio, dataFim);
         List<CarroOutputDTO> carroOutputDTOList = carroMapper.mapear(carros);
 
         if (carros.size() == 0) {

@@ -1,40 +1,14 @@
 package br.com.fundatec.carro.repository;
 
 import br.com.fundatec.carro.model.Carro;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
-@Repository
-public class CarroRepository {
+public interface CarroRepository extends CrudRepository<Carro, Long> { // <Entidade, PK>
 
-    private static List<Carro> listarCarros = new ArrayList<>();
+    List<Carro> findByNomeContainingIgnoreCase (String nome);
 
-    public List<Carro> filtrarLista(String nome) {
-        List<Carro> palavrasFiltradas = new ArrayList<>();
-
-        for (Carro carro : listarCarros) {
-            if (carro.getNome().toLowerCase().contains(nome.toLowerCase())) {
-                palavrasFiltradas.add(carro);
-            }
-        }
-        return palavrasFiltradas;
-    }
-
-    public Carro filtrarPorId (Long id) {
-        for (Carro carro : listarCarros) {
-            if (carro.getId().equals(id)) {
-                return carro;
-            }
-        }
-        return null;
-    }
-
-    public Carro incluir(Carro carro) {
-        carro.setId(new Long (listarCarros.size() + 1));
-        listarCarros.add(carro);
-        return carro;
-    }
-
+    List<Carro> findByDataFabricacaoBetween(LocalDate dataInicio, LocalDate dataFim);
 }
