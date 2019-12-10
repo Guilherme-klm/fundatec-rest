@@ -1,34 +1,22 @@
-package br.com.fundatec.carro.api;
+package br.com.fundatec.carro.api.dto;
 
-import org.apache.tomcat.jni.Local;
-
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-public class CarroInputDTO {
+public class CarroOutputDTO {
 
-    @NotBlank (message = "O campo nome é obrigatório!") // Valida que não pode ser nem vazio e branco
+    private Long id;
     private String nome;
-
-    // @Pattern(regexp = "^[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}$") validar cpf
-
-    @Pattern(regexp = "^[A-Z]{3}[0-9]{4}$", message = "Placa inválida")
-    @NotBlank (message = "O campo placa é obrigatório!")
     private String placa;
-
-    @NotNull(message = "Não pode ser nulo")
-    @Past(message = "A data não pode estar no futuro")
     private LocalDate dataFabricacao;
-
-    @NotNull(message = "Não pode ser nulo")
     private LocalDate dataModelo;
-
-    @NotNull(message = "Não pode ser nulo")
-    @NotEmpty(message = "Não pode ser vazio")
     private String marca;
 
-    public CarroInputDTO (){
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
