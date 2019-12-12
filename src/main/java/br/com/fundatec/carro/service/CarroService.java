@@ -1,5 +1,6 @@
 package br.com.fundatec.carro.service;
 
+import br.com.fundatec.carro.api.dto.CarroInputDTO;
 import br.com.fundatec.carro.model.Carro;
 import br.com.fundatec.carro.repository.CarroRepository;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,18 @@ public class CarroService {
         if (!(listaMarcas.contains(carro.getMarca()))) {
             throw new RuntimeException("A marca " + carro.getMarca() + " é inválida");
         }
+    }
+
+    public Carro atualizar (Long id, Carro carroParaAtualizar) {
+        Carro carro = filtrarPorId(id);
+        if (carro !=  null) {
+            carro.setNome(carroParaAtualizar.getNome());
+            carro.setMarca(carroParaAtualizar.getMarca());
+            carro.setPlaca(carroParaAtualizar.getPlaca());
+            carro.setDataFabricacao(carroParaAtualizar.getDataFabricacao());
+            carro.setDataModelo(carroParaAtualizar.getDataModelo());
+            carro = carroRepository.save(carro);
+        }
+        return carro;
     }
 }

@@ -75,7 +75,14 @@ public class CarroApi {
             erroDTO.setMensagem(e.getMessage());
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(erroDTO);
         }
+    }
 
+    @PutMapping("/carros/{id}")
+    public ResponseEntity<?> atualizarCarro (@PathVariable Long id, @Valid @RequestBody CarroInputDTO carroInputDTO) {
+        Carro carro = carroMapper.mapear(carroInputDTO);
+        carroService.atualizar(id, carro);
+        CarroOutputDTO carroOutputDTO = carroMapper.mapear(carro);
+        return ResponseEntity.ok().body(carroOutputDTO);
     }
 }
 
