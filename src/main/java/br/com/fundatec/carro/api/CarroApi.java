@@ -80,9 +80,13 @@ public class CarroApi {
     @PutMapping("/carros/{id}")
     public ResponseEntity<?> atualizarCarro (@PathVariable Long id, @Valid @RequestBody CarroInputDTO carroInputDTO) {
         Carro carro = carroMapper.mapear(carroInputDTO);
-        carroService.atualizar(id, carro);
-        CarroOutputDTO carroOutputDTO = carroMapper.mapear(carro);
-        return ResponseEntity.ok().body(carroOutputDTO);
+        carro = carroService.atualizar(id, carro);
+        if (carro == null) {
+            return ResponseEntity.noContent().build();
+        } else {
+            CarroOutputDTO carroOutputDTO = carroMapper.mapear(carro);
+            return ResponseEntity.ok().body(carroOutputDTO);
+        }
     }
 }
 

@@ -73,5 +73,25 @@ public class AtualizarCarroTest {
         Assert.assertEquals("2019-01-01", carroOutputDTO.getDataModelo().toString());
         Assert.assertEquals("OKS4912", carroOutputDTO.getPlaca());
         Assert.assertEquals("Fiat", carroOutputDTO.getMarca());
+
+
+    }
+
+    @Test
+    public void deveRetornarVazioQuandoAtualizarUmCarroInexistente() {
+        RestAssured.given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body("{\n" +
+                        "\t\"nome\": \"Prisma\",\n" +
+                        "\t\"dataFabricacao\": \"2019-01-01\",\n" +
+                        "\t\"dataModelo\": \"2019-01-01\",\n" +
+                        "\t\"placa\": \"OKS4912\",\n" +
+                        "\t\"marca\": \"Fiat\"\n" +
+                        "}")
+                .when()
+                .put("/carros/{id}", -1)
+                .then()
+                .statusCode(HttpStatus.NO_CONTENT.value());
     }
 }
