@@ -52,7 +52,7 @@ public class CarroService {
 
     public Carro atualizar (Long id, Carro carroParaAtualizar) {
         Carro carro = filtrarPorId(id);
-        if (carro !=  null) {
+        if (carro != null) {
             carro.setNome(carroParaAtualizar.getNome());
             carro.setMarca(carroParaAtualizar.getMarca());
             carro.setPlaca(carroParaAtualizar.getPlaca());
@@ -61,5 +61,9 @@ public class CarroService {
             carro = carroRepository.save(carro);
         }
         return carro;
+    }
+
+    public void excluirPorId (Long id) {
+        carroRepository.deleteById(id);
     }
 }

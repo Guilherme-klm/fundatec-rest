@@ -4,7 +4,6 @@ import br.com.fundatec.carro.api.dto.CarroOutputDTO;
 import br.com.fundatec.carro.model.Carro;
 import br.com.fundatec.carro.repository.CarroRepository;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.awt.*;
 import java.time.LocalDate;
 
 @RunWith(SpringRunner.class)
